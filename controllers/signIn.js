@@ -1,5 +1,9 @@
-const handleSignIn = (req, res, database, bcrypt) => {
-    const { email, password, hash } = req.body;
+export const handleSignIn = (req, res, database, bcrypt) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json('Form field is required. Please fill all the form!')
+    }
+
     database.select('email', 'hash').from('login')
         .where({
             'email': email
@@ -18,8 +22,4 @@ const handleSignIn = (req, res, database, bcrypt) => {
             }
         })
         .catch(err => res.status(400).json('wrong credential'))
-}
-
-module.exports = {
-    handleSignIn: handleSignIn
 }

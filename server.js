@@ -1,16 +1,18 @@
 
-require('dotenv').config()
-const express = require('express');
-const cors = require('cors')
-const bcrypt = require('bcryptjs');
+import * as dotenv from 'dotenv'
+dotenv.config();
+import express from 'express';
+import cors from 'cors'
+import bcrypt from 'bcryptjs';
+import knex from 'knex';
+
 const app = express();
-const knex = require('knex')
 const env = process.env;
 
 // Import controllers
-const register = require('./controllers/register')
-const signIn = require('./controllers/signIn')
-const profile = require('./controllers/profile')
+import { handleRegister } from './controllers/register.js';
+import { handleSignIn } from './controllers/signIn.js'
+import { handleProfile, handleImage } from './controllers/profile.js'
 
 // Right click on PostgreSQL pgadmin -> properties -> connection
 const database = knex({
@@ -28,11 +30,11 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors())
 
-app.post('/signin', (req, res) => { signIn.handleSignIn(req, res, database, bcrypt) })
-app.post('/register', (req, res) => { register.handleRegister(req, res, database, bcrypt) })
-app.get('/profile/:id', (req, res) => { profile.handleProfile(req, res, database)})
-app.put('/image', (req, res) => { profile.handleImage(req, res, database)})
+app.post('/signin', (req, res) => { handleSignIn(req, res, database, bcrypt) })
+app.post('/register', (req, res) => { handleRegister(req, res, database, bcrypt) })
+app.get('/profile/:id', (req, res) => { handleProfile(req, res, database)})
+app.put('/image', (req, res) => { handleImage(req, res, database)})
 
-app.listen(3000, () => {
-    console.log('App is running');
+app.listen(env['PORT'], () => {
+    console.log(`Server is listening on port ${env['PORT']}`);
 })
