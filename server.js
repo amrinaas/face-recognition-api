@@ -30,6 +30,9 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors())
 
+app.get('/', (req, res) => {
+  res.send('App is up to the server')
+})
 app.post('/signin', (req, res) => { handleSignIn(req, res, database, bcrypt) })
 app.post('/register', (req, res) => { handleRegister(req, res, database, bcrypt) })
 app.get('/profile/:id', (req, res) => { handleProfile(req, res, database)})
