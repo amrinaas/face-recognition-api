@@ -10,7 +10,10 @@ export const handleProfile = (req, res, database) => {
             res.status(400).json('user not found')
         }
     })
-    .catch(err => res.status(400).json('error getting user'))
+    .catch(err => res.status(400).json({
+        'err': err,
+        'message': 'Error getting user'
+    }))
 }
 
 export const handleImage = (req, res, database) => {
@@ -70,7 +73,12 @@ export const handleImage = (req, res, database) => {
                 'entries': entries[0].entries
             })
         })
-        .catch(err => res.status(400).json('unable to get entries'))
+        .catch(err => res.status(400).json({
+            'err': err,
+            'message': 'Unable to get entries'
+        }))
     })
-    .catch(error => console.log('error clarifai', error));
-}
+    .catch(err => res.status(400).json({
+        'err': err,
+        'message': "Unable to fetch clarifai's API"
+    }))}
