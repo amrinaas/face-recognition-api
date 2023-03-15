@@ -22,7 +22,11 @@ const database = knex({
       port : env['PORT_NAME'],
       user : env['USER_NAME'],
       password : env['PASSWORD'],
-      database : env['DATABASE_NAME']
+      database : env['DATABASE_NAME'],
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false
+      }
     }
   });
 
