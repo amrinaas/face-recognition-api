@@ -29,7 +29,6 @@ export const handleImage = (req, res, database) => {
     // Change these to whatever model and image URL you want to use
     const MODEL_ID = env['MODEL_ID_CLARIFAI'];
     const MODEL_VERSION_ID = env['MODEL_VERSION_ID_CLARIFAI'];    
-    const IMAGE_URL = imageUrl;
 
     ///////////////////////////////////////////////////////////////////////////////////
     // YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE TO RUN THIS EXAMPLE
@@ -44,7 +43,7 @@ export const handleImage = (req, res, database) => {
             {
                 "data": {
                     "image": {
-                        "url": IMAGE_URL
+                        "url": imageUrl
                     }
                 }
             }
@@ -68,7 +67,7 @@ export const handleImage = (req, res, database) => {
         .returning('entries')
         .then(entries => {
             res.json({
-                'result' : result,
+                'result' : JSON.parse(result),
                 'status': 200,
                 'entries': entries[0].entries
             })
