@@ -6,6 +6,9 @@ import cors from 'cors'
 import bcrypt from 'bcryptjs';
 import knex from 'knex';
 
+// Import error handler middleware
+import ErrorHandler from './middlewares/ErrorHandler.js';
+
 const app = express();
 const env = process.env;
 
@@ -23,6 +26,7 @@ const database = knex({
       user : env['USER_NAME'],
       password : env['PASSWORD'],
       database : env['DATABASE_NAME'],
+      // Config for server
       connectionString: process.env.DATABASE_URL,
       ssl: {
         rejectUnauthorized: false
@@ -45,3 +49,6 @@ app.put('/image', (req, res) => { handleImage(req, res, database)})
 app.listen(env['PORT'], () => {
     console.log(`Server is listening on port ${env['PORT']}`);
 })
+
+// Error handler middleware (Last middleware to use)
+app.use(ErrorHandler);
