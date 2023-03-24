@@ -16,7 +16,7 @@ https://image-recognition.netlify.app/
 ![image recog](https://user-images.githubusercontent.com/76085854/227434256-bcf921f1-c69d-4f40-8ff9-630670e73a04.png)
 
 ## Run Locally
-First, you MUST get your own PAT(Personal Access Token) from Clarifai. You can follow this guide as well
+First, you MUST get your own PAT(Personal Access Token) from Clarifai. You can follow this [guide](https://help.clarifai.com/hc/en-us/articles/4408131744407-Integrating-Clarifai-in-your-React-Javascript-project) as well
 
 
 Clone the project
